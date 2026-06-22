@@ -36,12 +36,12 @@ In non-agentic, dev-driven workflows, brytlog simply saves the developer the tim
 <tr>
 <td>
 
-![Before brytlog](placeholder_raw.gif)
+https://github.com/Guy-Sela/brytlog/raw/main/demo-no-brytlog.mp4
 
 </td>
 <td>
 
-![After brytlog](placeholder_ai.gif)
+https://github.com/Guy-Sela/brytlog/raw/main/demo-with-brytlog.mp4
 
 </td>
 </tr>
@@ -121,9 +121,6 @@ Instead of raw log, a short report is output to the terminal.
 
 ## Example output
 
-<details>
-<summary>View Example Output</summary>
-
 ```text
                                    ────────────────────────────────────────────────────────────
 
@@ -141,8 +138,6 @@ Full raw log → /path/to/project/brytlog-raw/2026-06-15T14-11-51.txt
 
                                    ────────────────────────────────────────────────────────────
 ```
-
-</details>
 
 ---
 

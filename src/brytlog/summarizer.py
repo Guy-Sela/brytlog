@@ -54,6 +54,13 @@ def _call_google(prompt: str, model: str, api_key: str, system_prompt: str, temp
 
     try:
         res = client.post(url, data, {"Content-Type": "application/json"})
+        if isinstance(res, dict) and "error" in res:
+            message = res["error"].get("message", res["error"])
+            return f"⚠️  Google API Error: {message}"
+
+        if "candidates" not in res:
+             return f"⚠️  Google API Error: Missing 'candidates' in response. Response: {res}"
+
         candidate = res["candidates"][0]
 
         text = candidate.get("content", {}).get("parts", [{}])[0].get("text", "").strip()
@@ -101,6 +108,13 @@ def _call_anthropic(prompt: str, model: str, api_key: str, system_prompt: str, t
 
     try:
         res = client.post(url, data, headers)
+        if isinstance(res, dict) and "error" in res:
+            message = res["error"].get("message", res["error"])
+            return f"⚠️  Anthropic API Error: {message}"
+
+        if "content" not in res:
+             return f"⚠️  Anthropic API Error: Missing 'content' in response. Response: {res}"
+
         text = res["content"][0]["text"].strip()
         if res.get("stop_reason") == "max_tokens":
             hint = "\nHint: The model ran out of tokens. If you're using a reasoning model, it may need a higher MAX_OUTPUT for 'thinking' tokens."
