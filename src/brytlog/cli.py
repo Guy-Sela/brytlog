@@ -224,7 +224,7 @@ def run(
             print(success_json, file=sys.stdout)
             print("\n" + indent + f"{DIM}─{RST}" * bar_len + "\n", file=sys.stderr)
         else:
-            title_text = "brytlog nuance extract"
+            title_text = "brytlog summary"
             full_title = f"🧠📜 {BLD}{title_text}{RST}"
             title_indent = " " * max(0, (term_width - len(title_text) - 4) // 2)
 
