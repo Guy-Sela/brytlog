@@ -36,12 +36,12 @@ In non-agentic, dev-driven workflows, brytlog simply saves the developer the tim
 <tr>
 <td>
 
-https://github.com/Guy-Sela/brytlog/raw/main/demo-no-brytlog.mp4
+https://github.com/Guy-Sela/brytlog/raw/master/demo-no-brytlog.mp4
 
 </td>
 <td>
 
-https://github.com/Guy-Sela/brytlog/raw/main/demo-with-brytlog.mp4
+https://github.com/Guy-Sela/brytlog/raw/master/demo-with-brytlog.mp4
 
 </td>
 </tr>
