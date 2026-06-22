@@ -28,22 +28,30 @@ In non-agentic, dev-driven workflows, brytlog simply saves the developer the tim
 - privacy minded (brytlog doesn't collect any data, and it redacts sensitive information before passing it to the LLM)
 
 
+
 <table>
 <tr>
-<th>Without brytlog (Raw)</th>
-<th>With brytlog (AI Summary)</th>
+<th>Without brytlog</th>
+<th>With brytlog</th>
+<th>With brytlog --json</th>
 </tr>
 <tr>
 <td>
+         
+https://github.com/user-attachments/assets/e7883564-e9be-4b67-b936-134a24ced4eb
 
-https://github.com/Guy-Sela/brytlog/raw/master/demo-no-brytlog.mp4
+</td>
+<td>
+         
+https://github.com/user-attachments/assets/29e3b3fa-48ad-4973-994b-6ece0097f097
 
 </td>
 <td>
 
-https://github.com/Guy-Sela/brytlog/raw/master/demo-with-brytlog.mp4
+https://github.com/user-attachments/assets/fd012964-8911-4501-9868-2784a7e72172
 
 </td>
+
 </tr>
 </table>
 
