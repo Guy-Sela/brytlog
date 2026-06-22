@@ -1,0 +1,29 @@
+# Brytlog: Agent Instructions
+
+Brytlog replaces raw logs with an AI summary, thus saving developers time, trouble and money (tokens). It wraps standard terminal commands, intercepts the terminal output (stdout/stderr), and outputs a concise AI report instead of the raw log.
+
+## Rules of Engagement (For Agents)
+
+- **Mandatory JSON Mode**: ALWAYS use the `--json` flag (e.g., `brytlog --json pytest`). This outputs a structured JSON object containing `metadata` and the AI `report` (including `problems` and `fixes`), eliminating the need for regex parsing.
+- **Strict Whitelist**: ONLY use `brytlog` for interpreters (`python`, `node`), compilers, build tools (`npm`, `make`), and test runners (`pytest`). NEVER use it for standard OS utilities (`ls`, `cat`), version control (`git`), or interactive CLI tools (`htop`, `vim`).
+- **Quiet Mode & Interactive Prompts**: By default, `brytlog` runs in quiet mode (`--quiet`). Raw stdout/stderr streams are suppressed, and interactive prompts are immediately aborted (via `stdin=DEVNULL`) to prevent invisible infinite hangs. To answer a prompt or view live streams, use `--no-quiet`.
+- **Retrieving Raw Logs**: The AI report is only a summary. If you need the exact stack trace, you can still access the complete raw logs. Provided `save_raw_log` is enabled in `~/.brytlog.json` (default is `true`), raw logs are automatically saved to the local `brytlog-raw/` directory. Read the latest file there to investigate further.
+- **Retrieving Past Reports**: AI reports are archived to the local `brytlog-reports/` directory and can be listed via `brytlog --logs`.
+
+## Usage Example
+
+```bash
+# Optimal command for agent workflows
+brytlog --json --quiet python script.py
+```
+
+## Architecture & Configuration
+
+- **Zero dependencies**: `brytlog` relies purely on Python's standard library. No `requests`, `openai`, or `anthropic` SDKs.
+- **Environment Overrides**: Configuration can be overridden dynamically using environment variables (e.g., `BRYTLOG_PROVIDER=openai`, `BRYTLOG_MODEL=gpt-4o`).
+- **Privacy & Security**: Brytlog does not collect user data. It automatically redacts sensitive information (like keys or tokens) from the terminal output before sending any data to the LLM API.
+- **Efficiency**: Long-running outputs are bounded via a `StreamAccumulator` that captures only the head and tail of the stream, preventing memory exhaustion.
+- **Core Files**:
+  - `cli.py`: Main entry point. Spawns child processes and chunks outputs.
+  - `config.py`: Handles configuration hierarchy (Env Var > `~/.brytlog.json` > Defaults).
+  - `summarizer.py`: Makes direct HTTP requests to LLM API endpoints.

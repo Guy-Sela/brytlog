@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environments
+.env
+.venv
+env/
+venv/
+
+# Tests / Coverage
+.cache/
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Static Analysis
+.mypy_cache/
+.ruff_cache/
+
+# IDEs
+.idea/
+.vscode/
+
+# Project
+brytlogs/
+brytlog-reports/
+brytlog-raw/
+.DS_Store

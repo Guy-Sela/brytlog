@@ -1,0 +1,46 @@
+# How to use Trusted Publishing:
+# 1. Go to PyPI > Account settings > Publishing > "Add a new pending publisher"
+# 2. Select GitHub
+# 3. Fill in the details:
+#    - Owner: Guy-Sela
+#    - Repository: brytlog
+#    - Workflow name: release.yml
+# 4. Once added, push a tag like `v0.1.1` to trigger this workflow.
+#    (e.g., `git tag v0.1.1 && git push origin v0.1.1`)
+
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  # Allows you to trigger the workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    name: Build and Publish to PyPI
+    runs-on: ubuntu-latest
+
+    # IMPORTANT: These permissions are required for Trusted Publishing via OIDC
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11" # Project requires >=3.11
+
+      - name: Install build tools
+        run: python -m pip install --upgrade pip build
+
+      - name: Build the package
+        run: python -m build
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
